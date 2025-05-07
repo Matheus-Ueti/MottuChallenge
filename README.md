@@ -88,10 +88,8 @@ mvn test
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
-## 📄 Licença
-
-Este projeto está sob a licença [MIT](LICENSE).
-
 ## ✨ Autores
 
-- RM557812 Matheus Munuera Ueti Ferraz - Desenvolvimento inicial
+- RM557812 Matheus Munuera Ueti Ferraz 
+- RM553907 Pedro Gomes 
+- RM555197 Luiz Felipe Abreu
