@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -83,6 +86,12 @@ public class PatioController {
         patio.setCapacidade(patioDTO.getCapacidade());
         
         return repository.save(patio);
+    }
+    
+    @GetMapping("/paginado")
+    public Page<Patio> listarPaginado(@PageableDefault(size = 10) Pageable pageable) {
+        log.info("Listando pátios com paginação");
+        return repository.findAll(pageable);
     }
     
     private Patio getPatio(Long id) {

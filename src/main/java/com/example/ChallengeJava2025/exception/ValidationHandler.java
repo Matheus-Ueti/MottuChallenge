@@ -6,6 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,5 +26,17 @@ public class ValidationHandler {
                 .stream()
                 .map(ValidationErrorMessage::new)
                 .toList();
+    }
+
+    @ExceptionHandler(org.springframework.web.server.ResponseStatusException.class)
+    @ResponseStatus
+    public String handle(ResponseStatusException e) {
+        return e.getReason();
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handle(Exception e) {
+        return "Erro interno: " + e.getMessage();
     }
 } 
